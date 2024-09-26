@@ -27,8 +27,8 @@ const sass = gulpsass(dartsass);
 import autoprefixer from "autoprefixer";
 import postcss from "gulp-postcss";
 import cssnano from "cssnano";
-import csscmq from "postcss-combine-media-query";
-import csscmq2 from "postcss-sort-media-queries";
+// import csscmq from "postcss-combine-media-query";
+// import csscmq2 from "postcss-sort-media-queries";
 import csssort from "css-declaration-sorter";
 import csspurge from "gulp-purgecss";
 // JAVASCRIPT
@@ -275,7 +275,8 @@ function serveReload(cb) {
 }
 function watcher(cb) {
   gulp.watch("src/pages/**/*.html", gulp.series(processHTML, serveReload));
-  gulp.watch("src/sass/**/*.scss", gulp.series(processSASS, serveReload));
+  gulp.watch("src/sass/**/*.*css", gulp.series(processSASS, serveReload));
+  // gulp.watch("src/sass/**/*.css", gulp.series(processSASS, serveReload));
   gulp.watch("src/javascript/**/*.js", gulp.series(processJS, serveReload));
   gulp.watch("src/images/**/*.*", gulp.series(processIMG, serveReload));
   cb();
