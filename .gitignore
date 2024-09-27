@@ -5,6 +5,7 @@ node_modules/
 .vscode/
 public/
 _fem*/
+_snippets/
 
 
 # ---------------------
