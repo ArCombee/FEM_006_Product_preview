@@ -27,6 +27,13 @@ h4,
 h5,
 h6 {
   line-height: 1;
+  text-wrap: balance;
+}
+p,
+li,
+figcaption {
+  text-wrap: pretty;
+  max-width: var(--chars, 65ch);
 }
 b,
 strong {
@@ -37,7 +44,8 @@ main {
 }
 img,
 picture {
-  vertical-align: middle;
+  display: block;
+  max-width: 100%;
   max-inline-size: 100%;
   block-size: auto;
   font-style: italic;
@@ -59,4 +67,10 @@ select {
 }
 [hidden="true"] {
   display: none;
+}
+ul[role="list"],
+li[role="list"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
