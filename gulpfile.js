@@ -10,16 +10,22 @@ const mode = modes({
   default: "development",
   verbose: false,
 });
+
 // SERVER
 import browserSync from "browser-sync";
 const server = browserSync.create();
+
 // HTML
 import htmlmin from "gulp-htmlmin";
+
 // IMAGES
 import imagemin, { gifsicle, mozjpeg, optipng, svgo } from "gulp-imagemin";
 import newer from "gulp-newer";
+// import imageminWebp from "imagemin-webp";
+
 // SVG
 import gsvgo from "gulp-svgo";
+
 // SASS CSS
 import gulpsass from "gulp-sass";
 import * as dartsass from "sass";
@@ -31,10 +37,10 @@ import cssnano from "cssnano";
 // import csscmq2 from "postcss-sort-media-queries";
 import csssort from "css-declaration-sorter";
 import csspurge from "gulp-purgecss";
+
 // JAVASCRIPT
 import babel from "gulp-babel";
 import terser from "gulp-terser";
-// import imageminWebp from "imagemin-webp";
 
 // FUNCTIONS
 function processSVG() {
@@ -184,7 +190,6 @@ function processIMG() {
     .pipe(gulp.dest("public/assets/images"));
 }
 function clearPublic(cb) {
-  // del.sync("public");
   deleteSync("public");
   cb();
 }
@@ -276,12 +281,11 @@ function serveReload(cb) {
 function watcher(cb) {
   gulp.watch("src/pages/**/*.html", gulp.series(processHTML, serveReload));
   gulp.watch("src/sass/**/*.*css", gulp.series(processSASS, serveReload));
-  // gulp.watch("src/sass/**/*.css", gulp.series(processSASS, serveReload));
   gulp.watch("src/javascript/**/*.js", gulp.series(processJS, serveReload));
   gulp.watch("src/images/**/*.*", gulp.series(processIMG, serveReload));
   cb();
 }
-// EXPORT FUNCIONS
+// EXPORT FUNCTIONS
 export const build = gulp.series(
   clearPublic,
   gulp.parallel(
@@ -295,7 +299,14 @@ export const build = gulp.series(
 );
 export const dev = gulp.series(
   clearPublic,
-  gulp.parallel(processHTML, processIMG, processJS, processSASS, processSVG),
+  gulp.parallel(
+    processHTML,
+    processIMG,
+    processJS,
+    processSASS,
+    processSVG,
+    copyFonts
+  ),
   serve,
   watcher
 );
